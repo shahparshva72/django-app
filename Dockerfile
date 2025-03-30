@@ -25,6 +25,10 @@ RUN uv venv
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-install-project --no-dev
 
+# Copy the scripts first
+COPY scripts/ ./scripts/
+RUN chmod +x scripts/entrypoint.sh scripts/start.sh
+
 # Copy the rest of the application
 COPY . .
 
